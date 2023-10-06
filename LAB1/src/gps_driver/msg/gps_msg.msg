@@ -1,4 +1,4 @@
-Header header
+Header Header
 float32 Latitude
 float32 Longitude
 float32 Altitude

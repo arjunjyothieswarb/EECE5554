@@ -24,8 +24,8 @@ class GPS_Node:
         rate = rospy.Rate(10)
 
         self.msg = gps_msg()
-        self.msg.header.frame_id = "GPS1_frame"
-        # print(type(self.msg.header.stamp.nsecs))
+        self.msg.Header.frame_id = "GPS1_frame"
+        # print(type(self.msg.Header.stamp.nsecs))
 
         self.flag = 0
 
@@ -139,8 +139,8 @@ class GPS_Node:
 
         ms_diff = millis - self.zero_millis
 
-        self.msg.header.stamp.secs = numpy.uint32(ms_diff/1000)
-        self.msg.header.stamp.nsecs = numpy.uint32(ms_diff%1000 * (10**9))
+        self.msg.Header.stamp.secs = numpy.uint32(ms_diff/1000)
+        self.msg.Header.stamp.nsecs = numpy.uint32(ms_diff%1000 * (10**9))
 
         pass
 
