@@ -6,5 +6,5 @@ float32 HDOP
 float32 UTM_easting
 float32 UTM_northing
 string UTC
-string Zone_letter
-int32 Zone_number
+string Letter
+int32 Zone

@@ -70,7 +70,7 @@ class GPS_Node:
             self.parse_latlon()
 
             # Convert lat & lon to UTM co-ordinates
-            (self.msg.UTM_easting, self.msg.UTM_northing, self.msg.Zone_number, self.msg.Zone_letter) = utm.from_latlon(self.msg.Latitude, self.msg.Longitude)
+            (self.msg.UTM_easting, self.msg.UTM_northing, self.msg.Zone, self.msg.Letter) = utm.from_latlon(self.msg.Latitude, self.msg.Longitude)
             
             pub.publish(self.msg)
 
@@ -157,8 +157,8 @@ class GPS_Node:
         print("HDOP: ", self.msg.HDOP)
         print("UTM_easting: ", self.msg.UTM_easting)
         print("UTM_northing: ", self.msg.UTM_northing)
-        print("Zone number: ", self.msg.Zone_number)
-        print("Zone Letter: ", self.msg.Zone_letter)
+        print("Zone number: ", self.msg.Zone)
+        print("Zone Letter: ", self.msg.Letter)
         
         pass
 
