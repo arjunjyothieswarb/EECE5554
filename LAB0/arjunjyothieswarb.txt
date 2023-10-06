@@ -1,0 +1,3 @@
+I successfully installed Ubuntu 20.04.6 LTS. Faced issues regarding incompatible network adapter drivers. Planning on using USB tethering for using WiFi.
+
+Installed git.
