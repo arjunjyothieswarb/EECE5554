@@ -24,7 +24,7 @@ class data_points:
         self.Easting.append(msg.UTM_easting)
         self.Northing.append(msg.UTM_northing)
         self.Altitude.append(msg.Altitude)
-        self.time.append(msg.header.stamp.secs)
+        self.time.append(msg.Header.stamp.secs)
         self.size = self.size + 1
         pass
 
@@ -82,9 +82,9 @@ class GPS_plotter:
     def __init__(self):
 
         # Opening bag files
-        occluded_bag = rosbag.Bag("../Data/occluded.bag")
-        open_bag = rosbag.Bag("../Data/open_canton.bag")
-        st_line = rosbag.Bag("../Data/straight_line.bag")
+        occluded_bag = rosbag.Bag("/home/bhanu/catkin_ws/data/occluded.bag")
+        open_bag = rosbag.Bag("/home/bhanu/catkin_ws/data/open.bag")
+        st_line = rosbag.Bag("/home/bhanu/catkin_ws/data/straight_line.bag")
 
         # Initializing data_points objects
         self.occluded_data = data_points()
