@@ -177,14 +177,16 @@ class GPS_plotter:
         # Opening 2nd window
         plt.figure("Error histogram", figsize=(12,6))
 
-        error_val = self.get_error(self.occluded_data, self.occluded_abs)
+        error_val, mean_error = self.get_error(self.occluded_data, self.occluded_abs)
+        print("Mean error of occluded data set:", mean_error)
         plt.subplot(121)
         plt.hist(error_val, bins=30)
         plt.title("Occluded data set")
         plt.xlabel("Error")
         plt.ylabel("Frequency")
 
-        error_val = self.get_error(self.open_data, self.open_abs)
+        error_val, mean_error = self.get_error(self.open_data, self.open_abs)
+        print("Mean error of open data set:", mean_error)
         plt.subplot(122)
         plt.hist(error_val, bins=30)
         plt.title("Open data set")
@@ -201,21 +203,21 @@ class GPS_plotter:
         plt.title("Easting vs Northing")
         plt.xlabel("Easting")
         plt.ylabel("Northing")
-
-        # Plotting the altitude vs time of st_line data set
-        plt.subplot(222)
-        plt.scatter(self.st_line_data.time, self.st_line_data.Altitude)
-        plt.title("Altitude vs Time")
-        plt.xlabel("Time Elapsed")
-        plt.ylabel("Altitude")
         
         # Plotting the fitted line
-        plt.subplot(223)
+        plt.subplot(222)
         plt.scatter(self.st_line_data.Easting, self.st_line_data.Northing)
         plt.plot(self.st_line_data.Easting, y_val, "r", linewidth=2)
         plt.title("Fitted line")
         plt.xlabel("Easting")
         plt.ylabel("Northing")
+
+        # Plotting the altitude vs time of st_line data set
+        plt.subplot(223)
+        plt.scatter(self.st_line_data.time, self.st_line_data.Altitude)
+        plt.title("Altitude vs Time")
+        plt.xlabel("Time Elapsed")
+        plt.ylabel("Altitude")
 
 
         print("RMS error of straight line data:", rms)
@@ -225,13 +227,17 @@ class GPS_plotter:
     def get_error(self, data, control):
         
         error_val = []
+        avg_error = 0
         
         # Getting the magnitude of error
         for i in range(data.size):
             error_val.append((((data.Easting[i] - control[0]) ** 2) + ((data.Northing[i] - control[1]) ** 2)) ** 0.5)
+            avg_error = avg_error + error_val[i]
             pass
+
+        avg_error = avg_error/data.size
         
-        return error_val
+        return (error_val, avg_error)
     pass    
 
 
