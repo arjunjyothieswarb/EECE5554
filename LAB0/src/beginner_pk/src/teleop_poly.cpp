@@ -1,4 +1,4 @@
-### This is the code that I used to create the polygon in the turltesim node ###
+// This is the code that I used to create the polygon in the turltesim node
 
 
 #include "ros/ros.h"
