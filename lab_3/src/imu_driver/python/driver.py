@@ -16,7 +16,7 @@ class IMU_Node():
 
         port = rospy.get_param('/port', '/dev/ttyUSB0')
 
-        pub = rospy.Publisher("/imu_data", imu_msg, queue_size=100)
+        pub = rospy.Publisher("/imu", imu_msg, queue_size=100)
         
         self.imu_data = imu_msg()
         self.imu_data.Header.frame_id = "IMU1_Frame"
