@@ -52,7 +52,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(
   FILES
   imu_msg.msg
-#   Message2.msg
+  trail.msg
 )
 
 ## Generate services in the 'srv' folder
