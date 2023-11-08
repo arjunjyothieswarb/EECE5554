@@ -121,13 +121,13 @@ class GPS_Node:
     def get_GPGGA_secs(self):
 
         # Recording milli-sec zero
-        if not self.flag:
-            self.hr_zero = int(self.data[1][:2])
-            self.min_zero = int(self.data[1][2:4])
-            self.sec_zero = int(self.data[1][4:6])
-            self.ms_zero = int(self.data[1][7:10])
-
-            self.zero_millis = (self.hr_zero * 3600000) + (self.min_zero * 60000) + (self.sec_zero * 1000) + self.ms_zero
+        # if not self.flag:
+            # self.hr_zero = int(self.data[1][:2])
+            # self.min_zero = int(self.data[1][2:4])
+            # self.sec_zero = int(self.data[1][4:6])
+            # self.ms_zero = int(self.data[1][7:10])
+# 
+            # self.zero_millis = (self.hr_zero * 3600000) + (self.min_zero * 60000) + (self.sec_zero * 1000) + self.ms_zero
 
         # Extracting current time
         hr = int(self.data[1][:2])
@@ -136,11 +136,16 @@ class GPS_Node:
         ms = int(self.data[1][7:10])
 
         millis = (hr * 3600000) + (min * 60000) + (sec * 1000) + ms
+        secs = numpy.uint32(millis/1000)
+        nsecs = numpy.uint32((millis%1000) * (10**6))
 
-        ms_diff = millis - self.zero_millis
+        # ms_diff = millis - self.zero_millis
 
-        self.msg.Header.stamp.secs = numpy.uint32(ms_diff/1000)
-        self.msg.Header.stamp.nsecs = numpy.uint32(ms_diff%1000 * (10**9))
+        # self.msg.Header.stamp.secs = numpy.uint32(ms_diff/1000)
+        # self.msg.Header.stamp.nsecs = numpy.uint32(ms_diff%1000 * (10**9))
+
+        self.msg.Header.stamp.secs = numpy.uint32(secs)
+        self.msg.Header.stamp.nsecs = numpy.uint32(nsecs)
 
         pass
 
