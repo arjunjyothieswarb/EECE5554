@@ -1,0 +1,18 @@
+<launch>
+    <!-- Gettign GPS port -->
+    <arg name="gps_port" default="/dev/ttyUSB0"/>
+    <param name="gps_port" value="$(arg gps_port)" type="string"/>
+
+    <!-- Getting IMU port -->
+    <arg name="imu_port" default="/dev/ttyACM0"/>
+    <param name="imu_port" value="$(arg imu_port)" type="string"/>
+    
+    <!-- Running the GPS node -->
+    <node name="GPS_Driver" pkg="mult_driver" type="gps_driver.py" output="screen"/>
+
+    <!-- Running the IMU nodes -->
+    <node name="quaternion_conversion_server" pkg="mult_driver" type="quaternion_conversion_server.py" output="screen"/>
+    <node name="IMU_Driver" pkg="mult_driver" type="imu_driver.py" output="screen"/>
+
+    <!-- <node pkg="rosbag" type="record" name="recorder" arg="record /imu /gps"/> -->
+</launch>
